@@ -6,7 +6,7 @@ class LocationProvider with ChangeNotifier{
   
   bool get isFirstTime => _box.get('check_hive', defaultValue: true);
   String get permissionFlag => _box.get('permission_flag', defaultValue: 'denied');
-
+  Map<String,dynamic> get locationMap => Map<String,dynamic>.from(_box.get('location_map', defaultValue: {}));
 
   Future<void> setFirstTime(bool value) async {
     await _box.put('check_hive', value);
@@ -20,4 +20,9 @@ class LocationProvider with ChangeNotifier{
   }
 
 
+  Future<void> setLocation(Map<String,dynamic> map) async{
+    await _box.put('location_map', map);
+    notifyListeners();
+  }
+  
 }

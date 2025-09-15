@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import 'package:turf/along.dart' as turf;
 import 'package:turf/boolean.dart' hide Position;
+import '../../provider/location_provider.dart';
 import 'map_polygon_list.dart';
 
 
 
 class FetchLocationAreaAndComparePolygon {
   static Future<void> fetchLocation(BuildContext context) async{
+    final provider = Provider.of<LocationProvider>(context, listen: false);
     try{
       Position position = await Geolocator.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high,distanceFilter: 0));
 
@@ -18,7 +21,10 @@ class FetchLocationAreaAndComparePolygon {
       final name = locationInfo["name"];
       final id = locationInfo["locationId"] as int;
 
-
+      provider.setLocation({
+        'name' : name,
+        'id' : id,
+      });
 
     }catch(e){
       debugPrint("Error fetching location: $e");
