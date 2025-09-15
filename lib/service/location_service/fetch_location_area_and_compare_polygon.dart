@@ -40,16 +40,9 @@ Map<String,dynamic> getLocationInfo(turf.Position userPosition){
 
   final polygons = [
     {"name": "Mirpur", "locationId" : 1, "polygon": mirpurPolygon},
-    {"name": "Wari & Gopibagh", "locationId" : 2, "polygon": wariGopiBaghPolygon},
-    {"name": "Uttara & Khilkhet", "locationId" : 3, "polygon": uttaraPolygon},
     {"name": "Badda", "locationId" : 4, "polygon": baddaPolygon},
     {"name": "Dhanmondi", "locationId" : 8, "polygon": dhanmondiPolygon},
-    {"name": "Gulshan, Banani, Mohakhali", "locationId" : 9, "polygon": gulshanBananiPolygon},
-    {"name": "Khilgoan & Basabo", "locationId" : 10, "polygon": khilgoanBasaboPolygon},
-    {"name": "Baridhara & Bashundhara", "locationId" : 11, "polygon": baridharaBashundharaPolygon},
-    {"name": "Moghbazar & Palton", "locationId" : 12, "polygon": moghBazarPoltonPolygon},
-    {"name": "Banasree & Rampura", "locationId" : 14, "polygon": banasreeRampurPolygon},
-    {"name": "Mohammadpur", "locationId" : 15, "polygon": mohammadPurPolygon},
+    {"name": "Banasree & Rampura", "locationId" : 14, "polygon": banasreeRampuraPolygon},
   ];
 
   for (final items in polygons) {
