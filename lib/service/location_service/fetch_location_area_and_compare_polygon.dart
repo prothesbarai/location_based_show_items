@@ -25,7 +25,7 @@ class FetchLocationAreaAndComparePolygon {
         'name' : name,
         'id' : id,
         'userLong' : position.longitude,
-        'userLat' : position.latitude
+        'userLat' : position.latitude,
       });
 
     }catch(e){
