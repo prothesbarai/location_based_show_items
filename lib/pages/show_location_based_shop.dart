@@ -85,16 +85,30 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
           ),
         ),
       ): _filterShops.isEmpty ? const Center(child: Text("কোনো নিকটবর্তী দোকান পাওয়া যায়নি")) :
-      ListView.builder(
+      GridView.builder(
         itemCount: _filterShops.length,
-          itemBuilder: (context, index) {
-            final shop = _filterShops[index];
-            return ListTile(
-              leading: const Icon(Icons.store, color: Colors.blue),
-              title: Text(shop.name),
-              subtitle: Text("Delivery Range: ${shop.deliveryRange}m"),
-            );
-          },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // default 2 items per row
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 1.2,
+        ),
+        itemBuilder: (context, index) {
+          final shop = _filterShops[index];
+          return Card(
+            elevation: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.store, color: Colors.blue, size: 40),
+                SizedBox(height: 10),
+                Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text("Delivery: ${shop.deliveryRange}m"),
+              ],
+            ),
+          );
+        },
+        padding: EdgeInsets.all(10),
       ),
     );
   }
