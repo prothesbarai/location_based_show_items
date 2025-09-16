@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Location-ID : ${provider.locationMap['id']},\nLocation-Name : ${provider.locationMap['name']}"),
+            //Text("Location-ID : ${provider.locationMap['id']},\nLocation-Name : ${provider.locationMap['name']}"),
             Text("User-Longitude : ${provider.locationMap['userLong']},\nUser-Latitude : ${provider.locationMap['userLat']}"),
             ElevatedButton(
                 onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ShowLocationBasedShop(),));},

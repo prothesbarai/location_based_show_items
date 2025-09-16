@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:location_based_show_items/constant/app_color.dart';
@@ -119,7 +120,9 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.store, color: Colors.blue, size: 40),
+                              shop.userImage != null && shop.userImage!.isNotEmpty ?
+                              CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}")):
+                              CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s")),
                               SizedBox(height: 8),
                               Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
                               Text("Delivery: ${shop.deliveryRange}m"),
