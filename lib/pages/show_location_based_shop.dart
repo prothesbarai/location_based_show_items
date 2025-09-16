@@ -93,12 +93,12 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
       SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 10),
         child: Column(
-          children: List.generate((_filterShops.length / verticalItemGrid).ceil(), (rowIndex) {
-            final int startIndex = rowIndex * verticalItemGrid;
+          /// >>> generate Function (length, (int index) )  Parameter Nay.....
+          children: List.generate((_filterShops.length / verticalItemGrid).ceil(), (int index) {
+            final int startIndex = index * verticalItemGrid;
             final int endIndex = ((startIndex + verticalItemGrid) > _filterShops.length) ? _filterShops.length : startIndex + verticalItemGrid;
             final rowItems = _filterShops.sublist(startIndex, endIndex);
             final screenWidth = MediaQuery.of(context).size.width;
-
             /// >>>           => 360          - 2 *    5    = 350    -  ( 3 - 1 ) * 2  = 346 / 3 = 115.33px Every Item Width  => If ( screenWidth = 360 & rowItems.length = 3 & horizontalPadding = 5 & gap = 2 Hoy )
             /// >>> i.e. Full Screen Theke two side er Padding Margin Gap Sob Remove kore  then Screen Width ke row item er length deye divided korte hobe...
             final rowItemWidth = (screenWidth - (2 * horizontalPadding) - ((rowItems.length - 1) * gap)) / rowItems.length;
