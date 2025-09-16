@@ -3,29 +3,6 @@ import 'package:turf/helpers.dart' as turf;
 /// Get Polygon Open Link :  https://geojson.io/
 
 
-
-final mirpurPolygon = turf.Polygon(coordinates: [
-  [
-    turf.Position(90.34246814979304, 23.851894699483637),
-    turf.Position(90.34505907283489, 23.82834584168161),
-    turf.Position(90.34137478771311, 23.820706464492872),
-    turf.Position(90.34344371138286, 23.798359322805325),
-    turf.Position(90.33687715041168, 23.784130848452023),
-    turf.Position(90.34736134232452, 23.78291862553837),
-    turf.Position(90.36164668828997, 23.777805457230997),
-    turf.Position(90.36734945350776, 23.77343026951226),
-    turf.Position(90.38019399605571, 23.776962477539854),
-    turf.Position(90.39033163013107, 23.775328170429304),
-    turf.Position(90.39770423557866, 23.77849084763608),
-    turf.Position(90.40306101380742, 23.81079781847535),
-    turf.Position(90.40685955308265, 23.842725295202214),
-    turf.Position(90.34178552966773, 23.85180990311666),
-    turf.Position(90.34246814979304, 23.851894699483637),
-  ]
-]);
-
-
-
 final dhanmondiPolygon = turf.Polygon(coordinates: [
   [
     turf.Position(90.35676467481738, 23.755918060572327),
@@ -50,26 +27,7 @@ final dhanmondiPolygon = turf.Polygon(coordinates: [
 
 
 
-final baddaPolygon = turf.Polygon(coordinates: [
-  [
-    turf.Position(90.41983045524, 23.796317992401796),
-    turf.Position(90.42132453682979, 23.79287652950829),
-    turf.Position(90.41916727719894, 23.781288336357605),
-    turf.Position(90.41828032281785, 23.77167179859366),
-    turf.Position(90.42298274562467, 23.767674094329166),
-    turf.Position(90.43402504170717, 23.76346480653602),
-    turf.Position(90.44403424883484, 23.762351109999088),
-    turf.Position(90.45962945760078, 23.759820663678155),
-    turf.Position(90.456427540719, 23.80165010940489),
-    turf.Position(90.43790093465361, 23.799878932528884),
-    turf.Position(90.42120073299884, 23.79770258757722),
-    turf.Position(90.41948673300527, 23.795374926589375),
-    turf.Position(90.41983045524, 23.796317992401796),
-  ]
-]);
-
-
-final banasreeRampuraPolygon = turf.Polygon(coordinates: [
+final banasreePolygon = turf.Polygon(coordinates: [
   [
     turf.Position(90.42307840110101, 23.76734693384323),
     turf.Position(90.41782470491165, 23.75864130021165),

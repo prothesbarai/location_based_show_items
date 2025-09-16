@@ -24,6 +24,8 @@ class FetchLocationAreaAndComparePolygon {
       provider.setLocation({
         'name' : name,
         'id' : id,
+        'userLong' : position.longitude,
+        'userLat' : position.latitude
       });
 
     }catch(e){
@@ -39,10 +41,8 @@ class FetchLocationAreaAndComparePolygon {
 Map<String,dynamic> getLocationInfo(turf.Position userPosition){
 
   final polygons = [
-    {"name": "Mirpur", "locationId" : 1, "polygon": mirpurPolygon},
-    {"name": "Badda", "locationId" : 4, "polygon": baddaPolygon},
-    {"name": "Dhanmondi", "locationId" : 8, "polygon": dhanmondiPolygon},
-    {"name": "Banasree & Rampura", "locationId" : 14, "polygon": banasreeRampuraPolygon},
+    {"name": "Dhanmondi", "locationId" : 16, "polygon": dhanmondiPolygon},
+    {"name": "Banasree", "locationId" : 19, "polygon": banasreePolygon},
   ];
 
   for (final items in polygons) {
@@ -56,6 +56,6 @@ Map<String,dynamic> getLocationInfo(turf.Position userPosition){
 
   }
 
-  return {"name": "Outside Dhaka Metro", "locationId": 13,};
+  return {"name": "Outside Dhaka", "locationId": 1619,};
 
 }
