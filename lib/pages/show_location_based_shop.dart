@@ -49,7 +49,7 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
           return distance <= shop.deliveryRange;
         }).toList();
 
-        //setState(() {isLoading = false;});
+        setState(() {isLoading = false;});
       }else {
         debugPrint("Failed to fetch shops. Status: ${response.statusCode}");
       }
