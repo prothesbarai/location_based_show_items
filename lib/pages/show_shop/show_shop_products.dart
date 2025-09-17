@@ -91,8 +91,8 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                                   ],
                                 ),
                                 Positioned(
-                                  right: 2,
-                                  bottom: 40,
+                                  right: 1,
+                                  bottom: 43,
                                   child: isExpanded
                                       ? Container(
                                     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30), boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],),
@@ -109,7 +109,10 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                                           },
                                           child: Icon(Icons.remove, size: 22, color: Colors.red),
                                         ),
-                                        Text("$count", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                          child: Text("$count", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                        ),
                                         Icon(Icons.add, size: 22, color: Colors.green),
                                       ],
                                     ),
