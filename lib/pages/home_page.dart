@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:location_based_show_items/pages/show_location_based_shop.dart';
+import 'package:location_based_show_items/pages/show_shop/show_location_based_shop.dart';
 import 'package:location_based_show_items/widgets/custom_appbar.dart';
 import 'package:location_based_show_items/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
