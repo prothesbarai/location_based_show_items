@@ -15,7 +15,8 @@ class ShowShopProducts extends StatefulWidget {
 }
 
 class _ShowShopProductsState extends State<ShowShopProducts> {
-
+  Map<int, bool> expandedMap = {};
+  Map<int, int> countMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,13 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                 return Padding(
                   padding: EdgeInsets.only(bottom: Config.gapProduct),
                   child: Row(
-                    children: rowItems.map((shop) {
-                      final isLastItem = shop == rowItems.last;
+                    children: rowItems.asMap().entries.map((entry) {
+                      final i = entry.key;
+                      final shop = entry.value;
+                      final globalIndex = startIndex + i;
+                      final isExpanded = expandedMap[globalIndex] ?? false;
+                      final count = countMap[globalIndex] ?? 0;
+                      final isLastItem = i == rowItems.length - 1;
                       return GestureDetector(
                         onTap: (){
                           if(kDebugMode){
@@ -87,16 +93,36 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                                 Positioned(
                                   right: 2,
                                   bottom: 40,
-                                  child: GestureDetector(
+                                  child: isExpanded
+                                      ? Container(
+                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30), boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],),
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              expandedMap[globalIndex] = false;
+                                              countMap[globalIndex] = 0;
+                                            });
+                                          },
+                                          child: Icon(Icons.remove, size: 22, color: Colors.red),
+                                        ),
+                                        Text("$count", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                        Icon(Icons.add, size: 22, color: Colors.green),
+                                      ],
+                                    ),
+                                  )
+                                      : GestureDetector(
                                     onTap: () {
-
+                                      setState(() {
+                                        expandedMap[globalIndex] = true;
+                                        countMap[globalIndex] = 1;
+                                      });
                                     },
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],
-                                      ),
+                                      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],),
                                       padding: EdgeInsets.all(6),
                                       child: Icon(Icons.add, size: 20, color: Colors.green),
                                     ),
