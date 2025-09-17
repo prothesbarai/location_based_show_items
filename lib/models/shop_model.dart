@@ -10,6 +10,7 @@ class ShopModel {
   final double? rating;
   final String openingHours;
   final bool? isOpen;
+  final List<ProductModel> products;
 
   ShopModel({
     required this.id,
@@ -23,6 +24,7 @@ class ShopModel {
     this.rating,
     required this.openingHours,
     this.isOpen,
+    required this.products,
   });
 
   factory ShopModel.fromJson(Map<String,dynamic> json){
@@ -38,7 +40,40 @@ class ShopModel {
         rating: (json['rating']as num).toDouble(),
         openingHours: json['openingHours'],
         isOpen: json['isOpen'],
+        products: (json['products'] as List<dynamic>).map((e) => ProductModel.fromJson(e)).toList(),
     );
   }
 
+}
+
+
+
+
+class ProductModel {
+  final int id;
+  final String name;
+  final double price;
+  final String category;
+  final int stock;
+  final String image;
+
+  ProductModel({
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.category,
+    required this.stock,
+    required this.image,
+  });
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'],
+      name: json['name'],
+      price: (json['price'] as num).toDouble(),
+      category: json['category'],
+      stock: json['stock'],
+      image: json['image'],
+    );
+  }
 }

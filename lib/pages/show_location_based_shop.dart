@@ -115,24 +115,41 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
                       margin: EdgeInsets.only(right: isLastItem ? 0 : gap),
                       child: Card(
                         elevation: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              shop.userImage != null && shop.userImage!.isNotEmpty ?
-                              CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}")):
-                              CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s")),
-                              SizedBox(height: 8),
-                              Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text(shop.phone, style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text(shop.description,textAlign: TextAlign.center,),
-                              Text(shop.openingHours,textAlign: TextAlign.center,),
-                              Text("Delivery: ${shop.deliveryRange}m"),
-                            ],
-                          ),
+                        child: Stack(
+                          children: [
+                            ///  Open / Close Image - Top Right
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Image.asset(shop.isOpen == true ? "assets/images/open.png" : "assets/images/closed.png", width: 40,),
+                            ),
+
+                            ///  Main Content Center Align
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    shop.userImage != null && shop.userImage!.isNotEmpty
+                                        ? CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}"),)
+                                        : CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"),),
+                                    SizedBox(height: 8),
+                                    Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                    Text(shop.phone, style: TextStyle(fontWeight: FontWeight.bold)),
+                                    Text(shop.description, textAlign: TextAlign.center),
+                                    Text(shop.openingHours, textAlign: TextAlign.center),
+                                    Text("Delivery: ${shop.deliveryRange}m"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+
+
                     );
                   }).toList(),
                 ),
@@ -147,3 +164,5 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
     );
   }
 }
+
+
