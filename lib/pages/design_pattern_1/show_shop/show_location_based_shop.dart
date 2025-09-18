@@ -133,9 +133,7 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      shop.userImage != null && shop.userImage!.isNotEmpty
-                                          ? CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}"),)
-                                          : CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"),),
+                                      shop.userImage != null && shop.userImage!.isNotEmpty ? CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}"),) : CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"),),
                                       SizedBox(height: 8),
                                       Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
                                       Text(shop.phone, style: TextStyle(fontWeight: FontWeight.bold)),
