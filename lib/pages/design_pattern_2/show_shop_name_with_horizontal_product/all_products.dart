@@ -110,6 +110,7 @@ class _AllProductsState extends State<AllProducts> {
                                                 children: [
                                                   Text(shop.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),maxLines: 1,overflow: TextOverflow.ellipsis,),
                                                   Text("${Config.productPriceSymbol}${shop.price}", style: const TextStyle(color: Colors.green)),
+                                                  SizedBox(height: 3,),
                                                 ],
                                               ),
                                             )
