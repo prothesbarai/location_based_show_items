@@ -5,8 +5,8 @@ import 'package:location_based_show_items/models/hive_model/add_to_cart_model.da
 import 'package:location_based_show_items/provider/cart_provider.dart';
 import 'package:location_based_show_items/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
-import '../../config/config.dart';
-import '../../models/shop_model.dart';
+import '../../../config/config.dart';
+import '../../../models/shop_model.dart';
 
 class ShowShopProducts extends StatefulWidget {
   final ShopModel shop;

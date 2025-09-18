@@ -5,12 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:location_based_show_items/config/config.dart';
 import 'package:location_based_show_items/constant/app_color.dart';
 import 'package:location_based_show_items/models/shop_model.dart';
-import 'package:location_based_show_items/pages/show_shop/show_shop_products.dart';
+import 'package:location_based_show_items/pages/design_pattern_1/show_shop/show_shop_products.dart';
 import 'package:location_based_show_items/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
 import 'package:turf/helpers.dart';
 import 'package:turf/turf.dart' as turf;
-import '../../provider/location_provider.dart';
+
+import '../../../provider/location_provider.dart';
 
 class ShowLocationBasedShop extends StatefulWidget {
   const ShowLocationBasedShop({super.key});
