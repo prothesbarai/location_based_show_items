@@ -16,6 +16,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
       title: Text(widget.pageTitle),
       backgroundColor: AppColor.primaryColor,
       centerTitle: true,

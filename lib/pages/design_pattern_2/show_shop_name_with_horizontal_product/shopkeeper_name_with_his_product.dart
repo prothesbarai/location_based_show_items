@@ -76,7 +76,7 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
     final provider = Provider.of<LocationProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: CustomAppbar(pageTitle: "PaiFast"),
+      appBar: CustomAppbar(pageTitle: "Grocery"),
       body: isLoading ?
       Center(
         child: Container(
@@ -96,123 +96,123 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
       ): _filterShops.isEmpty ? const Center(child: Text("কোনো নিকটবর্তী দোকান পাওয়া যায়নি")) :
       ListView.builder(
         itemCount: _filterShops.length,
-        padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           final shop = _filterShops[index];
-
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(child: Text(shop.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),),
-                  TextButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllProducts(shop: shop),),);}, child: const Text("All Products"),)
-                ],
-              ),
-              const SizedBox(height: 8),
-
-              SizedBox(
-                height: 190,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: shop.products.length,
-                  itemBuilder: (context, prodIndex) {
-                    final product = shop.products[prodIndex];
-                    return Container(
-                        width: 120,
-                        margin: EdgeInsets.only(right: 10),
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
-                          child: Stack(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AspectRatio(
-                                    aspectRatio: 1,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(topLeft:Radius.circular(12),topRight: Radius.circular(12)),
-                                      child: CachedNetworkImage(
-                                        imageUrl: product.image.isNotEmpty ? product.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s",
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) =>
-                                        const Center(child: CircularProgressIndicator()),
-                                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                                      ),
-                                    ),
-                                  ),
-
-                                  const SizedBox(height: 5),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                    child: Column(
-                                      children: [
-                                        Text(shop.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),maxLines: 1,overflow: TextOverflow.ellipsis,),
-                                        Text("${Config.productPriceSymbol}${product.price}", style: const TextStyle(color: Colors.green)),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-
-
-                              /// >>> Add To Cart And Remove Item From cart UI And Fucntion Start Here [Here Use Consumer => Cause A Short Part Tree Rebuild And Update UI Not Rebuild Full Tree]
-
-                              Positioned(
-                                  right: 1,
-                                  bottom: 43,
-                                  child: Consumer<CartProvider>(builder: (context, cartProvider, child) {
-                                    final qty = cartProvider.getQuantity(product.id);
-                                    return qty > 0 ?
-                                    Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                      decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(30),boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          /// >>> Remove Button
-                                          GestureDetector(
-                                            onTap: ()=>cartProvider.removeFromCart(product.id),
-                                            child: const Icon(Icons.remove_circle_outline,size: 22, color: Colors.red),
-                                          ),
-
-                                          /// >>> Quantity Text
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                            child: Text("$qty", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                                          ),
-
-                                          /// >>> Add Button
-                                          GestureDetector(
-                                            onTap: () => cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price,),),
-                                            child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
-                                          ),
-                                        ],
-                                      ),
-                                    ) :
-                                    GestureDetector(
-                                      onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price),),
-                                      child: Container(
-                                        decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
-                                        padding: const EdgeInsets.all(6),
-                                        child: const Icon(Icons.add_circle_outline,size: 20,color: Colors.green,),
-                                      ),
-                                    );
-                                  },)
-                              ),
-
-                              /// <<< Add To Cart And Remove Item From cart UI And Fucntion End Here
-
-
-                            ],
-                          ),
-                        )
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0,bottom:4.0, left: 10.0,right: 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(child: Text(shop.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),),
+                    TextButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllProducts(shop: shop),),);}, child: const Text("All Products"),)
+                  ],
                 ),
               ),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  double screenWidth = constraints.maxWidth;
+                  double visibleItems = 2.8;
+                  double itemWidth = screenWidth / visibleItems;
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(shop.products.length, (prodIndex) {
+                        final product = shop.products[prodIndex];
+                        return Container(
+                          width: itemWidth,
+                          margin: EdgeInsets.only(left: prodIndex == 0 ? 8 : 0, right: prodIndex == shop.products.length - 1 ? 8 : 3,),
+                          child: Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            child: Stack(
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.min, // auto height
+                                  children: [
+                                    AspectRatio(
+                                      aspectRatio: 1,
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                                        child: CachedNetworkImage(
+                                          imageUrl: product.image.isNotEmpty ? product.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s",
+                                          fit: BoxFit.cover,
+                                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Column(
+                                        children: [
+                                          Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                          Text("${Config.productPriceSymbol}${product.price}", style: const TextStyle(color: Colors.green),),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+
+                                /// >>> Add To Cart And Remove Item From cart UI And Fucntion Start Here [Here Use Consumer => Cause A Short Part Tree Rebuild And Update UI Not Rebuild Full Tree]
+
+                                Positioned(
+                                    right: 1,
+                                    bottom: 43,
+                                    child: Consumer<CartProvider>(builder: (context, cartProvider, child) {
+                                      final qty = cartProvider.getQuantity(product.id);
+                                      return qty > 0 ?
+                                      Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(30),boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            /// >>> Remove Button
+                                            GestureDetector(
+                                              onTap: ()=>cartProvider.removeFromCart(product.id),
+                                              child: const Icon(Icons.remove_circle_outline,size: 22, color: Colors.red),
+                                            ),
+
+                                            /// >>> Quantity Text
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: Text("$qty", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                            ),
+
+                                            /// >>> Add Button
+                                            GestureDetector(
+                                              onTap: () => cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price,),),
+                                              child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
+                                            ),
+                                          ],
+                                        ),
+                                      ) :
+                                      GestureDetector(
+                                        onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price),),
+                                        child: Container(
+                                          decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Icon(Icons.add_circle_outline,size: 20,color: Colors.green,),
+                                        ),
+                                      );
+                                    },)
+                                ),
+
+                                /// <<< Add To Cart And Remove Item From cart UI And Fucntion End Here
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  );
+                },
+              )
             ],
           );
         },
