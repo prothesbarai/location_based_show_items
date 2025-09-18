@@ -44,6 +44,7 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
 
         final List<dynamic> data = json.decode(response.body);
         final allShops = data.map((e)=>ShopModel.fromJson(e)).toList();
+
         final userPoint = turf.Point(coordinates: turf.Position(lng, lat));
 
         _filterShops = allShops.where((shop) {

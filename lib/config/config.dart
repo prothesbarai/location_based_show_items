@@ -8,4 +8,7 @@ class Config {
   static int get verticalItemGridProduct => 3;
   static double get horizontalPaddingProduct => 5;
   static double get gapProduct => 2;
+
+  /// >>> Product Price Symbol
+  static String get productPriceSymbol => "৳";
 }

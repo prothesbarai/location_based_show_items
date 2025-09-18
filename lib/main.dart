@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:location_based_show_items/pages/splash_screen.dart';
+import 'package:location_based_show_items/provider/cart_provider.dart';
 import 'package:location_based_show_items/provider/location_provider.dart';
 import 'package:location_based_show_items/service/hive_service/hive_service.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ Future<void> main() async{
     MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => LocationProvider()),
+          ChangeNotifierProvider(create: (_) => CartProvider()),
         ],
       child: MyApp(),
     )

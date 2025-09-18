@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:location_based_show_items/models/hive_model/add_to_cart_model.dart';
+import 'package:location_based_show_items/provider/cart_provider.dart';
 import 'package:location_based_show_items/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 import '../../config/config.dart';
 import '../../models/shop_model.dart';
 
@@ -15,8 +18,6 @@ class ShowShopProducts extends StatefulWidget {
 }
 
 class _ShowShopProductsState extends State<ShowShopProducts> {
-  Map<int, bool> expandedMap = {};
-  Map<int, int> countMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +41,8 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                 return Padding(
                   padding: EdgeInsets.only(bottom: Config.gapProduct),
                   child: Row(
-                    children: rowItems.asMap().entries.map((entry) {
-                      final i = entry.key;
-                      final shop = entry.value;
-                      final globalIndex = startIndex + i;
-                      final isExpanded = expandedMap[globalIndex] ?? false;
-                      final count = countMap[globalIndex] ?? 0;
-                      final isLastItem = i == rowItems.length - 1;
+                    children: rowItems.map((shop) {
+                      final isLastItem = shop == rowItems.last;
                       return GestureDetector(
                         onTap: (){
                           if(kDebugMode){
@@ -84,69 +80,62 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
                                       child: Column(
                                         children: [
                                           Text(shop.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),maxLines: 1,overflow: TextOverflow.ellipsis,),
-                                          Text("৳${shop.price}", style: const TextStyle(color: Colors.green)),
+                                          Text("${Config.productPriceSymbol}${shop.price}", style: const TextStyle(color: Colors.green)),
                                         ],
                                       ),
                                     )
                                   ],
                                 ),
+
+
+                                /// >>> Add To Cart And Remove Item From cart UI And Fucntion Start Here [Here Use Consumer => Cause A Short Part Tree Rebuild And Update UI Not Rebuild Full Tree]
+
                                 Positioned(
-                                  right: 1,
-                                  bottom: 43,
-                                  child: isExpanded
-                                      ? Container(
-                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30), boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],),
-                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              int current = countMap[globalIndex] ?? 1;
-                                              if (current > 1) {
-                                                countMap[globalIndex] = current - 1;
-                                              } else {
-                                                expandedMap[globalIndex] = false;
-                                                countMap[globalIndex] = 0;
-                                              }
-                                            });
-                                          },
-                                          child: Icon(Icons.remove, size: 22, color: Colors.red),
+                                    right: 1,
+                                    bottom: 43,
+                                    child: Consumer<CartProvider>(builder: (context, cartProvider, child) {
+                                      final qty = cartProvider.getQuantity(shop.id);
+                                      return qty > 0 ?
+                                      Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(30),boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            /// >>> Remove Button
+                                            GestureDetector(
+                                              onTap: ()=>cartProvider.removeFromCart(shop.id),
+                                              child: const Icon(Icons.remove_circle_outline,size: 22, color: Colors.red),
+                                            ),
+
+                                            /// >>> Quantity Text
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: Text("$qty", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                            ),
+
+                                            /// >>> Add Button
+                                            GestureDetector(
+                                              onTap: () => cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,),),
+                                              child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                          child: Text("${countMap[globalIndex] ?? 1}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                                      ) :
+                                      GestureDetector(
+                                        onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price),),
+                                        child: Container(
+                                          decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Icon(Icons.add_circle_outline,size: 20,color: Colors.green,),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              countMap[globalIndex] = (countMap[globalIndex] ?? 1) + 1;
-                                            });
-                                          },
-                                          child: Icon(Icons.add, size: 22, color: Colors.green),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                      : GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        expandedMap[globalIndex] = true;
-                                        countMap[globalIndex] = 1;
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],
-                                      ),
-                                      padding: EdgeInsets.all(6),
-                                      child: Icon(Icons.add, size: 20, color: Colors.green),
-                                    ),
-                                  ),
-                                )
+                                      );
+                                    },)
+                                ),
+
+                                /// <<< Add To Cart And Remove Item From cart UI And Fucntion End Here
+
+
                               ],
                             ),
                           )
