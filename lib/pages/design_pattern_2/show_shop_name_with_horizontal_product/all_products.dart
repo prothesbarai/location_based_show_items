@@ -91,7 +91,7 @@ class _AllProductsState extends State<AllProducts> {
                     /// Category Title
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
-                      child: Text(category, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                      child: Text(category, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                     ),
 
                     /// HorizontalBuilder reuse

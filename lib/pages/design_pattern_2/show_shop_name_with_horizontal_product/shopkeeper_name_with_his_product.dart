@@ -104,8 +104,16 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(child: Text("${shop.name}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),),
-                    TextButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllProducts(shop: shop),),);}, child: const Text("All Products"),)
+                    Flexible(child: Text("${shop.name}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),),),
+                    TextButton(
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllProducts(shop: shop),),);}, 
+                      child: Row(
+                        children: [
+                          const Text("All Products",style: TextStyle(fontSize: 14),),
+                          const Icon(Icons.arrow_forward_ios_rounded,size: 14,)
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
