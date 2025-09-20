@@ -1,28 +1,28 @@
 class ShopModel {
   final int id;
-  final String name;
+  final String? name;
   final String? userImage;
-  final double lat;
-  final double lng;
-  final double deliveryRange;
-  final String description;
-  final String phone;
+  final double? lat;
+  final double? lng;
+  final double? deliveryRange;
+  final String? description;
+  final String? phone;
   final double? rating;
-  final String openingHours;
+  final String? openingHours;
   final bool? isOpen;
   final List<ProductModel> products;
 
   ShopModel({
     required this.id,
-    required this.name,
+    this.name,
     this.userImage,
-    required this.lat,
-    required this.lng,
-    required this.deliveryRange,
-    required this.description,
-    required this.phone,
+    this.lat,
+    this.lng,
+    this.deliveryRange,
+    this.description,
+    this.phone,
     this.rating,
-    required this.openingHours,
+    this.openingHours,
     this.isOpen,
     required this.products,
   });
@@ -30,17 +30,17 @@ class ShopModel {
   factory ShopModel.fromJson(Map<String,dynamic> json){
     return ShopModel(
         id: json['id'],
-        name: json['name'],
-        userImage: json['userImage'],
-        lat: (json['lat'] as num).toDouble(),
-        lng: (json['lng'] as num).toDouble(),
-        deliveryRange: (json['deliveryRange'] as num).toDouble(),
-        description: json['description'],
-        phone: json['phone'],
-        rating: (json['rating']as num).toDouble(),
-        openingHours: json['openingHours'],
-        isOpen: json['isOpen'],
-        products: (json['products'] as List<dynamic>).map((e) => ProductModel.fromJson(e)).toList(),
+      name: json['name'] as String? ?? '',
+      userImage: json['userImage'] as String? ?? '',
+      lat: (json['lat'] != null) ? (json['lat'] as num).toDouble() : 0.0,
+      lng: (json['lng'] != null) ? (json['lng'] as num).toDouble() : 0.0,
+      deliveryRange: (json['deliveryRange'] != null) ? (json['deliveryRange'] as num).toDouble() : 0.0,
+      description: json['description'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      rating: (json['rating'] != null) ? (json['rating'] as num).toDouble() : 0.0,
+      openingHours: json['openingHours'] as String? ?? '',
+      isOpen: json['isOpen'] as bool? ?? false,
+      products: (json['products'] != null && json['products'] is List) ? (json['products'] as List).map((e) => ProductModel.fromJson(e)).toList() : [],
     );
   }
 

@@ -49,9 +49,9 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
         final userPoint = turf.Point(coordinates: turf.Position(lng, lat));
 
         _filterShops = allShops.where((shop) {
-          final shopPoint = turf.Point(coordinates: turf.Position(shop.lng, shop.lat));
+          final shopPoint = turf.Point(coordinates: turf.Position(shop.lng!, shop.lat!));
           final distance = turf.distance(userPoint, shopPoint, Unit.meters);
-          return distance <= shop.deliveryRange;
+          return distance <= shop.deliveryRange!;
         }).toList();
 
         setState(() {isLoading = false;});
@@ -104,7 +104,7 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(child: Text(shop.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),),
+                    Flexible(child: Text("${shop.name}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),),
                     TextButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllProducts(shop: shop),),);}, child: const Text("All Products"),)
                   ],
                 ),

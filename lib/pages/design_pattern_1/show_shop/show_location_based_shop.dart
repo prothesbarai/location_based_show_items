@@ -49,9 +49,9 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
         final userPoint = turf.Point(coordinates: turf.Position(lng, lat));
 
         _filterShops = allShops.where((shop) {
-          final shopPoint = turf.Point(coordinates: turf.Position(shop.lng, shop.lat));
+          final shopPoint = turf.Point(coordinates: turf.Position(shop.lng!, shop.lat!));
           final distance = turf.distance(userPoint, shopPoint, Unit.meters);
-          return distance <= shop.deliveryRange;
+          return distance <= shop.deliveryRange!;
         }).toList();
 
         setState(() {isLoading = false;});
@@ -135,10 +135,10 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
                                     children: [
                                       shop.userImage != null && shop.userImage!.isNotEmpty ? CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${shop.userImage}"),) : CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"),),
                                       SizedBox(height: 8),
-                                      Text(shop.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text(shop.phone, style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text(shop.description, textAlign: TextAlign.center),
-                                      Text(shop.openingHours, textAlign: TextAlign.center),
+                                      Text("${shop.name}", style: TextStyle(fontWeight: FontWeight.bold)),
+                                      Text("${shop.phone}", style: TextStyle(fontWeight: FontWeight.bold)),
+                                      Text("${shop.description}", textAlign: TextAlign.center),
+                                      Text("${shop.openingHours}", textAlign: TextAlign.center),
                                       Text("Delivery: ${shop.deliveryRange}m"),
                                     ],
                                   ),
