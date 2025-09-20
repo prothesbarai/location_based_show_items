@@ -58,7 +58,11 @@ class _AllProductsState extends State<AllProducts> {
                     const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
-                  Positioned(left: 5, top: 5, child: CircleAvatar(radius: 30,backgroundColor: Color(0xff808080),)),
+                  Positioned(
+                      left: 5,
+                      top: 5,
+                      child: widget.shop.userImage != null && widget.shop.userImage!.isNotEmpty ? CircleAvatar(radius: 40, backgroundImage: CachedNetworkImageProvider("${widget.shop.userImage}"),) : CircleAvatar(radius: 30, backgroundImage: CachedNetworkImageProvider("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"),)
+                  ),
                   Positioned(
                       right: 0,
                       top: 0,
