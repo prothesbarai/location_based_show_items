@@ -71,8 +71,6 @@ class _AllProductsState extends State<AllProducts> {
                   ),
                 ],
               ),
-
-              const SizedBox(height: 10),
               
               /// >>>  Show Product Category Wise >>>
               const SizedBox(height: 10),
@@ -88,14 +86,13 @@ class _AllProductsState extends State<AllProducts> {
                   children: [
                     /// Category Title
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
                       child: Text(category, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     ),
 
                     /// HorizontalBuilder reuse
                     HorizontalBuilder(shop: categoryShop),
 
-                    const SizedBox(height: 12),
                   ],
                 );
               }),
