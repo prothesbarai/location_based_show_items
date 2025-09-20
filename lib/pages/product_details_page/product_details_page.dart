@@ -62,47 +62,59 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
 
         // Product Image with Lottie zoom hint
-        ClipRRect(
-        borderRadius: BorderRadius.circular(0.0),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            InteractiveViewer(
-              panEnabled: true,
-              minScale: 1,
-              maxScale: 4,
-              onInteractionUpdate: (details) {
-                if (details.scale > 1.0 && _showZoomHint) {
-                  setState(() {_showZoomHint = false;});
-                }
-              },
-              child: CachedNetworkImage(
-                width: double.infinity,
-                imageUrl: widget.productImage,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(0),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return GestureDetector(
+                        onScaleStart: (_) {},
+                        child: InteractiveViewer(
+                          scaleEnabled: true,
+                          panEnabled: true,
+                          minScale: 1,
+                          maxScale: 4,
+                          onInteractionUpdate: (details) {
+                            if (details.scale > 1.0 && _showZoomHint) {
+                              setState(() {_showZoomHint = false;});
+                            }
+                          },
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: CachedNetworkImage(
+                              width: double.infinity,
+                              imageUrl: widget.productImage,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  // Lottie overlay
+                  if (_showZoomHint)
+                    Positioned.fill(
+                      child: IgnorePointer(
+                        child: Container(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          child: Center(
+                            child: Transform.rotate(
+                              angle: 70 * 3.1415927 / 180,
+                              child: Lottie.asset("assets/lottie/hintzoom.json", height: 100, width: 100, repeat: true,),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
 
-            // Lottie overlay, but ignores gestures so zoom still works
-            if (_showZoomHint)
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: Container(
-                    color: Colors.black.withValues(alpha: 0.5),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Lottie.asset("assets/lottie/hintzoom.json", height: 100, width: 100, repeat: true,),],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
 
 
 
@@ -111,7 +123,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
 
 
-        const SizedBox(height: 16),
+            const SizedBox(height: 16),
 
 
             Padding(
@@ -143,7 +155,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
                   const SizedBox(height: 6),
                   Text(widget.productDescription, style: const TextStyle(fontSize: 15, height: 1.4),),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 150),
 
                 ],
               ),
