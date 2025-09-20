@@ -56,6 +56,7 @@ class ProductModel {
   final String category;
   final int stock;
   final String image;
+  final String description;
 
   ProductModel({
     required this.id,
@@ -64,6 +65,7 @@ class ProductModel {
     required this.category,
     required this.stock,
     required this.image,
+    required this.description,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -74,6 +76,7 @@ class ProductModel {
       category: json['category'],
       stock: json['stock'],
       image: json['image'],
+      description: json['description'],
     );
   }
 }

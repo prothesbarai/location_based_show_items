@@ -28,7 +28,7 @@ class HorizontalBuilder extends StatelessWidget {
                   width: itemWidth,
                   margin: EdgeInsets.only(left: prodIndex == 0 ? 8 : 0, right: prodIndex == shop.products.length - 1 ? 8 : 3,),
                   child: GestureDetector(
-                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsPage(productId: product.id, productName: product.name, shopKeeperName: "${shop.name}", productImage: product.image, productDescription: "productDescription", productCategory: product.category, productPrice: product.price, productStock: product.stock),)),
+                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsPage(productId: product.id, productName: product.name, shopKeeperName: "${shop.name}", productImage: product.image, productDescription: product.description, productCategory: product.category, productPrice: product.price, productStock: product.stock),)),
                     child: Card(
                       elevation: 2,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
