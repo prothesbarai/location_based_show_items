@@ -83,7 +83,7 @@ class _AllProductsState extends State<AllProducts> {
               ...categoryWiseProducts.entries.map((entry) {
                 final category = entry.key;
                 final products = entry.value;
-                final categoryShop = ShopModel(id: widget.shop.id, products: products,);
+                final categoryShop = ShopModel(id: widget.shop.id, products: products,name: widget.shop.name);
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
