@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:location_based_show_items/config/config.dart';
 import 'package:location_based_show_items/widgets/custom_appbar.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import '../../models/hive_model/add_to_cart_model.dart';
+import '../../provider/cart_provider.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final int productId;
@@ -167,12 +170,52 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
       // Bottom Buy Add to Cart Button
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(bottom: 46,left: 16,right: 16,top: 16),
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8, offset: const Offset(0, -2),),],),
-        child: ElevatedButton(
-          onPressed: widget.productStock > 0 ? () {} : null,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),),
-          child: Text(widget.productStock > 0 ? "Add to Cart" : "Out of Stock", style: const TextStyle(fontSize: 18, color: Colors.white),),
+        padding: const EdgeInsets.only(bottom: 46, left: 16, right: 16, top: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8, offset: const Offset(0, -2),),],
+        ),
+        child: widget.productStock > 0 ?
+        Consumer<CartProvider>(
+          builder: (context, cart, child) {
+            final quantity = cart.getQuantity(widget.productId);
+            if (quantity == 0) {
+              return ElevatedButton(
+                onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice, quantity: 1,),);},
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),),
+                child: const Text("Add to Cart", style: TextStyle(fontSize: 18, color: Colors.white),),
+              );
+            } else {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(12),),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Minus Button
+                    IconButton(
+                      onPressed: () {cart.removeFromCart(widget.productId);},
+                      icon: const Icon(Icons.remove_circle_outline, color: Colors.white),
+                    ),
+
+                    // Quantity Text
+                    Text("$quantity", style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),),
+
+                    // Plus Button
+                    IconButton(
+                      onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice, quantity: 1,),);},
+                      icon: const Icon(Icons.add_circle_outline, color: Colors.white),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ) :
+        ElevatedButton(
+          onPressed: null,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.grey, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),),
+          child: const Text("Out of Stock", style: TextStyle(fontSize: 18, color: Colors.white),),
         ),
       ),
     );
