@@ -25,7 +25,7 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
         child: Column(
             children: [
               /// >>> Vertically Reusable Product Items
-              ...buildVerticallyProductItems(context, widget.shop.products),
+              ...buildVerticallyProductItems(context, widget.shop.products,"${widget.shop.name}"),
             ]
         ),
       ),

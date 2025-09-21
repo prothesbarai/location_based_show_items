@@ -16,7 +16,7 @@ class CartProvider with ChangeNotifier{
   
   /// >>>  Kono Product er Quantity Ber korar Jonno 
   int getQuantity(int productId){
-    final item = _cartBox.values.firstWhere((e)=> e.productId == productId, orElse: ()=> AddToCartModel(productId: productId, name: "", image: "", price: 0,category : "",stock: 0,description: "",quantity: 0),);
+    final item = _cartBox.values.firstWhere((e)=> e.productId == productId, orElse: ()=> AddToCartModel(productId: productId, name: "", image: "", price: 0,category : "",stock: 0,description: "",shopKeeperName:"",quantity: 0),);
     return item.quantity;
   }
 

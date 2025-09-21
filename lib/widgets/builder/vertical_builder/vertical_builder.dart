@@ -6,7 +6,7 @@ import '../../../config/config.dart';
 import '../../../models/hive_model/add_to_cart_model.dart';
 import '../../../provider/cart_provider.dart';
 
-List<Widget> buildVerticallyProductItems(BuildContext context, List products) { /// >>> generate Function (length, (int index) )  Parameter Nay.....
+List<Widget> buildVerticallyProductItems(BuildContext context, List products, String shopKeeperName) { /// >>> generate Function (length, (int index) )  Parameter Nay.....
   return List.generate((products.length / Config.verticalItemGridProduct).ceil(), (int index) {
     final int startIndex = index * Config.verticalItemGridProduct;
     final int endIndex = ((startIndex + Config.verticalItemGridProduct) > products.length) ? products.length : startIndex + Config.verticalItemGridProduct;
@@ -94,14 +94,14 @@ List<Widget> buildVerticallyProductItems(BuildContext context, List products) { 
 
                                   /// >>> Add Button
                                   GestureDetector(
-                                    onTap: () => cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock),),
+                                    onTap: () => cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock,shopKeeperName: shopKeeperName),),
                                     child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
                                   ),
                                 ],
                               ),
                             ) :
                             GestureDetector(
-                              onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock),),
+                              onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock,shopKeeperName: shopKeeperName),),
                               child: Container(
                                 decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
                                 padding: const EdgeInsets.all(6),

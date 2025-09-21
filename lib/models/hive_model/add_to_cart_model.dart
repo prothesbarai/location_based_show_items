@@ -25,6 +25,9 @@ class AddToCartModel extends HiveObject{
   int stock;
 
   @HiveField(7)
+  String shopKeeperName;
+
+  @HiveField(8)
   int quantity;
 
   AddToCartModel({
@@ -35,6 +38,7 @@ class AddToCartModel extends HiveObject{
     this.category = "",
     this.description = "",
     this.stock = 0,
+    this.shopKeeperName = "",
     this.quantity = 0,
   });
 

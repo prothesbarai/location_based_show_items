@@ -35,7 +35,7 @@ class CartPage extends StatelessWidget {
                         children: [
                           ListTile(
                             leading: GestureDetector(
-                              onTap :(){Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsPage(productId: item.productId, productName: item.name, shopKeeperName: "shopKeeperName", productImage: item.image, productDescription: item.description, productCategory: item.category, productPrice: item.price, productStock: item.stock),));},
+                              onTap :(){Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsPage(productId: item.productId, productName: item.name, shopKeeperName: item.shopKeeperName, productImage: item.image, productDescription: item.description, productCategory: item.category, productPrice: item.price, productStock: item.stock),));},
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: CachedNetworkImage(
