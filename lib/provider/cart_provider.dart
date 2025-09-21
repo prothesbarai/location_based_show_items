@@ -73,4 +73,11 @@ class CartProvider with ChangeNotifier{
    }
  }
 
+  /// >>> Full Cart Empty Purpose
+  void clearCart() async {
+    await _cartBox.clear();
+    notifyListeners();
+  }
+
+
 }

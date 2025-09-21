@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:location_based_show_items/constant/app_color.dart';
 import 'package:location_based_show_items/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../pages/cart_page/cart_page.dart';
 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget{

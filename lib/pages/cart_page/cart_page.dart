@@ -25,8 +25,32 @@ class CartPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.builder(
-                  itemCount: cartItems.length,
+                  itemCount: cartItems.length + 1,
                   itemBuilder: (context, index) {
+
+                    /// >>> Remove cart button item
+                    if (index == cartItems.length) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 50.0, left: 10, right: 10),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            onPressed: () {cartProvider.clearCart();},
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                              backgroundColor: Colors.pink,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [Icon(Icons.delete_forever, color: Colors.white), SizedBox(width: 5), Text("Clear Your Cart", style: TextStyle(color: Colors.white),),],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+
                     final item = cartItems[index];
                     return Card(
                       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
