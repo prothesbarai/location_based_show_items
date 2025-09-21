@@ -16,7 +16,7 @@ class CartProvider with ChangeNotifier{
   
   /// >>>  Kono Product er Quantity Ber korar Jonno 
   int getQuantity(int productId){
-    final item = _cartBox.values.firstWhere((e)=> e.productId == productId, orElse: ()=> AddToCartModel(productId: productId, name: "", image: "", price: 0, quantity: 0),);
+    final item = _cartBox.values.firstWhere((e)=> e.productId == productId, orElse: ()=> AddToCartModel(productId: productId, name: "", image: "", price: 0,category : "",stock: 0,description: "",quantity: 0),);
     return item.quantity;
   }
 
@@ -62,5 +62,15 @@ class CartProvider with ChangeNotifier{
 
   /// >>> Cart e alada koyta product add holo (unique product count)
   int get uniqueProductsCount => _cartBox.values.where((item) => item.quantity > 0).length;
+
+
+  /// >>> Specific Item Remove from Cart
+ void deleteItem(int productId){
+   final existingIndex = _cartBox.values.toList().indexWhere((e) => e.productId == productId);
+   if (existingIndex != -1) {
+     _cartBox.deleteAt(existingIndex);
+     notifyListeners();
+   }
+ }
 
 }

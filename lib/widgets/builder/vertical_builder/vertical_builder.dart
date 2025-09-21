@@ -94,14 +94,14 @@ List<Widget> buildVerticallyProductItems(BuildContext context, List products) { 
 
                                   /// >>> Add Button
                                   GestureDetector(
-                                    onTap: () => cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,),),
+                                    onTap: () => cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock),),
                                     child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
                                   ),
                                 ],
                               ),
                             ) :
                             GestureDetector(
-                              onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price),),
+                              onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: shop.id, name: shop.name, image: shop.image, price: shop.price,description: shop.description,category: shop.category,stock: shop.stock),),
                               child: Container(
                                 decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
                                 padding: const EdgeInsets.all(6),

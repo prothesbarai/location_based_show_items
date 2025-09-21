@@ -3,6 +3,8 @@ import 'package:location_based_show_items/constant/app_color.dart';
 import 'package:location_based_show_items/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/cart_page/cart_page.dart';
+
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget{
   final String pageTitle;
   final bool showCartIcon;
@@ -46,9 +48,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
               offset: Offset(-5, 5),
               padding: EdgeInsets.symmetric(horizontal: 3, vertical: 1),
               child: IconButton(
-                  onPressed: () {
-
-                  },
+                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => const CartPage()),);},
                   tooltip: 'Cart', icon: Icon(Icons.shopping_cart,size: 26,)
               ),
             ),

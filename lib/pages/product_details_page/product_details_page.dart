@@ -181,7 +181,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             final quantity = cart.getQuantity(widget.productId);
             if (quantity == 0) {
               return ElevatedButton(
-                onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice, quantity: 1,),);},
+                onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice,category: widget.productCategory, description: widget.productDescription,stock: widget.productStock,),);},
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),),
                 child: const Text("Add to Cart", style: TextStyle(fontSize: 18, color: Colors.white),),
               );
@@ -203,7 +203,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                     // Plus Button
                     IconButton(
-                      onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice, quantity: 1,),);},
+                      onPressed: () {cart.addToCart(AddToCartModel(productId: widget.productId, name: widget.productName, image: widget.productImage, price: widget.productPrice, category: widget.productCategory, description: widget.productDescription,stock: widget.productStock,),);},
                       icon: const Icon(Icons.add_circle_outline, color: Colors.white),
                     ),
                   ],

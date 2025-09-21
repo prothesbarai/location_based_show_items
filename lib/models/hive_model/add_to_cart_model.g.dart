@@ -21,14 +21,17 @@ class AddToCartModelAdapter extends TypeAdapter<AddToCartModel> {
       name: fields[1] as String,
       image: fields[2] as String,
       price: fields[3] as double,
-      quantity: fields[4] as int,
+      category: fields[4] as String,
+      description: fields[5] as String,
+      stock: fields[6] as int,
+      quantity: fields[7] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, AddToCartModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.productId)
       ..writeByte(1)
@@ -38,6 +41,12 @@ class AddToCartModelAdapter extends TypeAdapter<AddToCartModel> {
       ..writeByte(3)
       ..write(obj.price)
       ..writeByte(4)
+      ..write(obj.category)
+      ..writeByte(5)
+      ..write(obj.description)
+      ..writeByte(6)
+      ..write(obj.stock)
+      ..writeByte(7)
       ..write(obj.quantity);
   }
 

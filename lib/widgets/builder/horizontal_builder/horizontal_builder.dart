@@ -91,14 +91,14 @@ class HorizontalBuilder extends StatelessWidget {
                     
                                       /// >>> Add Button
                                       GestureDetector(
-                                        onTap: () => cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price,),),
+                                        onTap: () => cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price,description: product.description,category: product.category,stock: product.stock),),
                                         child: const Icon(Icons.add_circle_outline, size: 22, color: Colors.green),
                                       ),
                                     ],
                                   ),
                                 ) :
                                 GestureDetector(
-                                  onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price),),
+                                  onTap: ()=>cartProvider.addToCart(AddToCartModel(productId: product.id, name: product.name, image: product.image, price: product.price,description: product.description,category: product.category,stock: product.stock),),
                                   child: Container(
                                     decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle,boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 3)]),
                                     padding: const EdgeInsets.all(6),
