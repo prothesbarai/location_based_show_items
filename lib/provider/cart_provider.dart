@@ -56,6 +56,11 @@ class CartProvider with ChangeNotifier{
   }
 
 
+  /// >>> Cart e total koyta item (quantity soho) ache seta ber korar jonno
+  int get totalItems => _cartBox.values.fold(0, (sum, item) => sum + item.quantity);
 
+
+  /// >>> Cart e alada koyta product add holo (unique product count)
+  int get uniqueProductsCount => _cartBox.values.where((item) => item.quantity > 0).length;
 
 }

@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
     final provider = Provider.of<LocationProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: CustomAppbar(pageTitle: "Home"),
+      appBar: CustomAppbar(pageTitle: "Home",showCartIcon: false,),
       drawer: CustomDrawer(),
       body: Center(
         child: Column(

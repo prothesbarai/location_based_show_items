@@ -40,7 +40,7 @@ class _AllProductsState extends State<AllProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(pageTitle: "${widget.shop.name}"),
+      appBar: CustomAppbar(pageTitle: "${widget.shop.name}",showCartIcon: true,),
       body: widget.shop.products.isEmpty ? const Center(child: Text("No products found")) :
       SingleChildScrollView(
         physics: BouncingScrollPhysics(),

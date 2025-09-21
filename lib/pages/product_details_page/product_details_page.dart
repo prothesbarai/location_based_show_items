@@ -41,7 +41,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(pageTitle: widget.shopKeeperName),
+      appBar: CustomAppbar(pageTitle: widget.shopKeeperName,showCartIcon: true,),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

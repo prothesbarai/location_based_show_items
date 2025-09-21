@@ -73,7 +73,7 @@ class _ShopkeeperNameWithHisProductState extends State<ShopkeeperNameWithHisProd
     final provider = Provider.of<LocationProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: CustomAppbar(pageTitle: "Grocery"),
+      appBar: CustomAppbar(pageTitle: "Grocery",showCartIcon: true,),
       body: isLoading ?
       Center(
         child: Container(

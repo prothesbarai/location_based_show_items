@@ -18,7 +18,7 @@ class _ShowShopProductsState extends State<ShowShopProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(pageTitle: "${widget.shop.name}"),
+      appBar: CustomAppbar(pageTitle: "${widget.shop.name}",showCartIcon: false,),
       body: widget.shop.products.isEmpty ? const Center(child: Text("No products found")) :
       SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: Config.horizontalPaddingProduct, vertical: 10),

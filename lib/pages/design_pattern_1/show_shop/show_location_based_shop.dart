@@ -72,7 +72,7 @@ class _ShowLocationBasedShopState extends State<ShowLocationBasedShop> {
 
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(pageTitle: "Show Shop"),
+      appBar: CustomAppbar(pageTitle: "Show Shop",showCartIcon: false,),
       body: isLoading ?
       Center(
         child: Container(
