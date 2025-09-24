@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import '../../../constant/app_color.dart';
 import '../../../pages/home_page.dart';
+import '../../../provider/location_provider.dart';
 import '../fetch_location_area_and_compare_polygon.dart';
 import '../location_dont_allow_control_pages/denied_forever_page.dart';
 import '../overlay_loading_and_update_hive.dart';
 
 Widget buildPopupItem(BuildContext context) {
   bool isLoading = false;
-  Box permissionFlagBox = Hive.box("GetAndStorePermissionFlag");
-  String permissionFlag = permissionFlagBox.get("permission_flag");
+  final provider = Provider.of<LocationProvider>(context, listen: false);
+  final permissionFlag = provider.permissionFlag;
   //final cartProvider = Provider.of<CartProvider>(context);
   return StatefulBuilder(
     builder: (context, setState) {
